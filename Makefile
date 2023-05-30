@@ -4,6 +4,9 @@ run format:
 run dev req:
 	pipenv requirements --dev > dev_requirements.txt
 
+run prod req:
+	pipenv requirements > requirements.txt
+
 run migrations:
 	python docker_django/manage.py makemigrations
 
@@ -12,4 +15,3 @@ run migrate:
 
 run venv_prod:
 	python -m venv venv
-	

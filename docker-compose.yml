@@ -1,12 +1,40 @@
 version: '3.4'
 
 services:
+  redis:
+      image: 'redis:alpine'
+      hostname: redis
+      ports:
+        - "6379:6379"
+
   dockerdjango:
     image: dockerdjango
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker_django/Docker/Dockerfile
     ports:
       - 8000:8000
     environment:
       - SECRET_KEY=${SECRET_KEY}
+
+  celery_worker:
+    restart: unless-stopped
+    build:
+        context: .
+        dockerfile: ./docker_django/Docker/Dockerfile
+    entrypoint: /app/Docker/django_worker.sh
+    depends_on:
+      - redis
+    volumes:
+      - ./docker_django:/app
+
+  celery_beat:
+    restart: unless-stopped
+    build:
+        context: .
+        dockerfile: ./docker_django/Docker/Dockerfile
+    entrypoint: /app/Docker/django_beat.sh
+    depends_on:
+      - redis
+    volumes:
+      - ./docker_django:/app

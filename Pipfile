@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 gunicorn = "*"
+celery = "*"
+redis = "*"
 
 [dev-packages]
 black = "*"
