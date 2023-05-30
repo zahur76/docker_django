@@ -85,19 +85,6 @@ DATABASES = {
 # celery config
 CELERY_BROKER_URL = "redis://redis:6379"
 
-
-CELERY_BEAT_SCHEDULE = {
-    "add-every-30-seconds": {
-        "task": "celery_tasks.tasks.say_hello",
-        "schedule": 5.0,
-        "args": (),
-        "options": {
-            "expires": 15.0,
-        },
-    },
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
