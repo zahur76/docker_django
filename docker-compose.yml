@@ -9,9 +9,7 @@ services:
 
   dockerdjango:
     image: dockerdjango
-    build:
-      context: .
-      dockerfile: ./docker_django/Docker/Dockerfile
+    build: .
     ports:
       - 8000:8000
     environment:
@@ -19,20 +17,15 @@ services:
 
   celery_worker:
     restart: unless-stopped
-    build:
-        context: .
-        dockerfile: ./docker_django/Docker/Dockerfile
+    build: .
     entrypoint: /app/Docker/django_worker.sh
     depends_on:
       - redis
     volumes:
       - ./docker_django:/app
-
   celery_beat:
     restart: unless-stopped
-    build:
-        context: .
-        dockerfile: ./docker_django/Docker/Dockerfile
+    build: .
     entrypoint: /app/Docker/django_beat.sh
     depends_on:
       - redis
