@@ -23,6 +23,7 @@ services:
       - redis
     volumes:
       - ./docker_django:/app
+      
   celery_beat:
     restart: unless-stopped
     build: .

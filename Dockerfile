@@ -12,7 +12,6 @@ ENV PYTHONUNBUFFERED=1
 # Create work directory
 WORKDIR /app
 COPY docker_django /app
-COPY docker_django/Docker /app/Docker
 
 # Install pip requirements
 COPY requirements.txt /app
